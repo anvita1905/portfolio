@@ -46,6 +46,46 @@
 
 * { box-sizing: border-box; }
 
+/* ---- Panther mark (site logo) ----
+   Single alpha-cutout PNG, recolored per-context via mask + currentColor. */
+.logo-mark {
+  display: inline-block;
+  flex-shrink: 0;
+  width: 30px;
+  height: 14px;
+  background-color: currentColor;
+  -webkit-mask-image: url("../../images/panther-mark.png");
+  mask-image: url("../../images/panther-mark.png");
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+}
+
+/* Faint full-page watermark, tucked bottom-right, present on every page */
+.page::after {
+  content: "";
+  position: fixed;
+  right: -40px;
+  bottom: -30px;
+  width: min(480px, 60vw);
+  height: min(480px, 60vw);
+  pointer-events: none;
+  z-index: -1;
+  background-color: var(--text);
+  opacity: 0.05;
+  -webkit-mask-image: url("../../images/panther-mark.png");
+  mask-image: url("../../images/panther-mark.png");
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+}
+
 html {
   scroll-behavior: smooth;
   overflow-x: hidden;
@@ -161,6 +201,35 @@ nav a.nav-pill.active {
 }
 
 .nav-spacer { flex: 1; }
+
+/* ---- Brand (logo + wordmark, first item in nav) ---- */
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text);
+  text-decoration: none;
+  margin-right: 4px;
+}
+
+.brand:hover { color: var(--accent-strong); }
+.brand:hover .logo-mark { color: var(--accent-strong); }
+
+.brand .logo-mark {
+  width: 34px;
+  height: 16px;
+  color: var(--accent);
+  transition: color 0.2s ease;
+}
+
+.brand-name {
+  font-family: "Kunstler Script", "Brush Script MT", "Segoe Script", cursive;
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+nav.section .brand { padding: 0; border: none; background: none; box-shadow: none; }
+nav.section .brand:hover { transform: none; box-shadow: none; }
 
 /* ---- Theme toggle ---- */
 .theme-toggle {
@@ -340,11 +409,16 @@ blockquote {
 .work-list { padding-left: 18px; margin: 0; }
 
 footer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   color: var(--muted);
   font-size: 0.95rem;
   margin-top: 24px;
   text-align: left;
 }
+
+footer .logo-mark { width: 24px; height: 11px; }
 
 /* ---- Hero (index) ---- */
 .hero {
@@ -352,6 +426,21 @@ footer {
   flex-direction: column;
   gap: 14px;
   padding: 20px 4px 32px;
+  position: relative;
+}
+
+.hero-mark {
+  position: absolute;
+  top: -6px;
+  right: 0;
+  width: 150px;
+  height: 70px;
+  color: var(--accent);
+  opacity: 0.5;
+}
+
+@media (max-width: 640px) {
+  .hero-mark { display: none; }
 }
 
 .hero-eyebrow {
