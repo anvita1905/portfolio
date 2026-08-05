@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Atlas | Chronosphere</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="stars"></div>
+    <div class="scan-overlay"></div>
+
+    <div class="app-shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">ARCHIVE ACCESS // GEOHISTORY</p>
+          <h1>Atlas</h1>
+          <p class="topbar-copy">A cinematic atlas of civilizations, empires, migration corridors, and the geography of power.</p>
+        </div>
+        <div class="topbar-actions">
+          <div class="search-shell">
+            <input id="global-search" type="search" placeholder="Search empires, kingdoms, routes, peoples..." />
+            <div id="search-results" class="search-results"></div>
+          </div>
+          <div class="status-pill">LIVE ARCHIVE</div>
+        </div>
+      </header>
+
+      <main class="main-grid">
+        <section class="panel globe-panel">
+          <div class="panel-heading">
+            <div>
+              <p class="section-label">MISSION VIEW</p>
+              <h2>Planetary history in motion</h2>
+            </div>
+            <div class="pill-group">
+              <span class="pill">Migration layer</span>
+              <span class="pill">Border animation</span>
+              <span class="pill">Trade routes</span>
+            </div>
+          </div>
+
+          <div class="globe-stage">
+            <div class="globe-scene">
+              <div class="globe-sphere" id="globe-sphere">
+                <div class="globe-atmosphere"></div>
+                <svg class="globe-svg" viewBox="0 0 600 600" aria-hidden="true">
+                  <defs>
+                    <radialGradient id="oceanGlow" cx="35%" cy="25%" r="70%">
+                      <stop offset="0%" stop-color="#6f9fe7" />
+                      <stop offset="35%" stop-color="#2d5e95" />
+                      <stop offset="70%" stop-color="#12365b" />
+                      <stop offset="100%" stop-color="#071422" />
+                    </radialGradient>
+                    <linearGradient id="landGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stop-color="#3f7b56" />
+                      <stop offset="100%" stop-color="#18453a" />
+                    </linearGradient>
+                    <radialGradient id="earthShade" cx="30%" cy="25%" r="75%">
+                      <stop offset="0%" stop-color="rgba(255,255,255,0.12)" />
+                      <stop offset="100%" stop-color="rgba(0,0,0,0.38)" />
+                    </radialGradient>
+                  </defs>
+                  <circle cx="300" cy="300" r="220" fill="url(#oceanGlow)"></circle>
+                  <path d="M146 216c14-26 43-43 72-42 26 1 48 13 64 35 13 18 18 44 11 67-7 24-24 42-46 53-23 11-49 12-72 5-23-7-42-24-52-46-10-23-9-48 3-72 4-7 7-13 20-0z" fill="url(#landGlow)" opacity="0.9"></path>
+                  <path d="M331 152c18-16 43-23 66-17 22 6 41 23 50 44 10 22 8 47-5 67-12 19-34 33-57 36-24 4-49-5-65-23-15-16-24-37-24-59 0-19 6-31 16-48z" fill="url(#landGlow)" opacity="0.9"></path>
+                  <path d="M251 320c18-16 40-24 63-24 18 1 35 8 47 22 12 13 19 31 18 48-1 19-11 37-27 48-18 13-41 19-63 15-21-4-40-17-52-35-12-18-15-40-9-60 3-9 10-10 23-14z" fill="url(#landGlow)" opacity="0.86"></path>
+                  <path d="M420 268c11-18 31-30 51-28 25 2 45 20 56 42 11 22 8 50-6 69-12 16-32 28-51 31-24 4-46-8-61-27-14-19-19-43-14-64 3-9 8-16 25-23z" fill="url(#landGlow)" opacity="0.84"></path>
+                  <path d="M150 302c12-18 30-29 50-32 13-2 26 0 38 6 8 4 14 12 16 21 3 10 2 22-4 31-8 12-22 20-36 22-17 2-34-3-48-12-10-7-18-19-17-32 1-6 1-6 1-8z" fill="#0e4a3d" opacity="0.65"></path>
+                  <g opacity="0.24" stroke="#dceeff" stroke-width="1.4" fill="none">
+                    <path d="M125 238c44 24 86 36 128 38" />
+                    <path d="M175 185c42 7 77 35 110 78" />
+                    <path d="M340 175c32 18 57 44 78 80" />
+                    <path d="M280 360c28 26 60 40 94 44" />
+                  </g>
+                  <circle cx="300" cy="300" r="220" fill="url(#earthShade)" opacity="0.55"></circle>
+                </svg>
+                <div class="globe-shine"></div>
+                <div class="marker-layer" id="marker-layer" role="list" aria-label="Interactive historical entities"></div>
+                <div class="globe-ring"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="globe-status" id="globe-status" aria-live="polite">Select a marker to open the archive dossier.</div>
+          <p class="globe-hint">Use Tab to focus a marker, press Enter to open its dossier, and move the timeline to watch history unfold.</p>
+          <div class="legend">
+            <span><i class="dot colonizer"></i> Imperial systems</span>
+            <span><i class="dot colonized"></i> Colonized societies</span>
+            <span><i class="dot route"></i> Migration / trade</span>
+          </div>
+        </section>
+
+        <aside class="panel control-panel">
+          <div class="timeline-card">
+            <div class="panel-heading compact">
+              <div>
+                <p class="section-label">TIME ENGINE</p>
+                <h3>Historical timeline</h3>
+              </div>
+              <button id="play-toggle" class="icon-button" aria-label="Play historical timeline">▶</button>
+            </div>
+            <input id="time-slider" type="range" min="-4000" max="2025" value="1600" step="25" />
+            <div class="timeline-meta">
+              <span id="time-display">1600 CE</span>
+              <span id="era-label">Early modern global exchange</span>
+            </div>
+            <div id="timeline-events" class="timeline-events"></div>
+          </div>
+
+          <div id="archive-panel" class="archive-panel">
+            <div class="archive-header">
+              <p class="section-label">ARCHIVE ACCESS</p>
+              <h3>ACCESSING DATABASE...</h3>
+              <p class="archive-copy">Select an empire, civilization, or migration corridor to reveal its dossier.</p>
+            </div>
+          </div>
+        </aside>
+      </main>
+
+      <section class="panel migration-panel" aria-labelledby="migration-title">
+        <div class="panel-heading">
+          <div>
+            <p class="section-label">MIGRATION SYSTEM</p>
+            <h2 id="migration-title">Human movement across the world</h2>
+          </div>
+          <p class="migration-intro">Animated migration corridors reveal how labor, conquest, trade, faith, and displacement reshaped the map.</p>
+        </div>
+        <div class="migration-grid">
+          <article class="migration-card">
+            <h3>Atlantic slavery and forced migration</h3>
+            <p>Millions were forced from Africa to the Americas, altering demography, language, music, foodways, and identity.</p>
+          </article>
+          <article class="migration-card">
+            <h3>Indentured labor and empire</h3>
+            <p>Indian, Chinese, and other laborers moved under coercive contracts to plantations, railways, and colonial ports.</p>
+          </article>
+          <article class="migration-card">
+            <h3>Postcolonial diaspora</h3>
+            <p>Modern migration networks continue to connect former colonies and imperial metropoles through family, finance, and culture.</p>
+          </article>
+        </div>
+      </section>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
