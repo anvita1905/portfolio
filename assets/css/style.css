@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&display=swap");
+
 /* ==========================================================================
    Shared design system — Anvita Tripathi portfolio
    ========================================================================== */
@@ -113,8 +115,8 @@ body {
 }
 
 h1, h2, h3 {
-  font-family: "Kunstler Script", "Brush Script MT", "Segoe Script", cursive;
-  font-weight: 500;
+  font-family: "Cormorant Garamond", Garamond, "Times New Roman", serif;
+  font-weight: 600;
   letter-spacing: 0.01em;
 }
 
@@ -223,7 +225,7 @@ nav a.nav-pill.active {
 }
 
 .brand-name {
-  font-family: "Kunstler Script", "Brush Script MT", "Segoe Script", cursive;
+  font-family: "Cormorant Garamond", Garamond, "Times New Roman", serif;
   font-size: 1.5rem;
   line-height: 1;
 }
@@ -530,7 +532,7 @@ footer .logo-mark { width: 24px; height: 11px; }
   margin-bottom: 8px;
 }
 
-.featured-title { font-family: "Kunstler Script", "Brush Script MT", "Segoe Script", cursive; font-size: 1.8rem; margin: 0; }
+.featured-title { font-family: "Cormorant Garamond", Garamond, "Times New Roman", serif; font-size: 1.6rem; line-height: 1.2; margin: 0; }
 
 /* ---- Plain-headings override (about, work, and content pages) ---- */
 .plain-headings h1,
