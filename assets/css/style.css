@@ -590,6 +590,27 @@ footer .logo-mark { width: 24px; height: 11px; }
 .work-card:hover .work-thumb img { transform: scale(1.04); }
 .work-title { display: block; padding: 12px 14px 14px; line-height: 1.35; }
 
+/* ---- Timeline (share the light) ---- */
+.timeline { list-style: none; margin: 8px 0 0; padding: 0 0 0 22px; border-left: 2px solid var(--border); }
+.timeline-item { position: relative; padding: 0 0 26px; }
+.timeline-item:last-child { padding-bottom: 4px; }
+.timeline-item::before {
+  content: "";
+  position: absolute;
+  left: -30px;
+  top: 4px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 4px var(--surface);
+}
+.timeline-item.is-upcoming::before { background: var(--surface); border: 2px solid var(--accent); width: 10px; height: 10px; }
+.timeline-date { display: block; font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent-strong); }
+.timeline-item h3 { margin: 4px 0 12px; font-size: 1.4rem; }
+.timeline-poster { margin: 0; max-width: 320px; border-radius: 12px; overflow: hidden; box-shadow: var(--shadow); }
+.timeline-poster img { display: block; width: 100%; height: auto; }
+
 /* ---- Plain-headings override (about, work, and content pages) ---- */
 .plain-headings h1,
 .plain-headings h2,
